@@ -10,7 +10,7 @@ Developer helper scripts
 ctx
 ```
 Create a context within a project for LLMs. 
-Fuzzy find and select directories with <TAB> and create context with <ENTER>.
+Fuzzy find and select directories with `<TAB>` and create context with `<ENTER>`.
 Context is saved to clipboard and can be pasted in your favorite LLM chat.
 
 ### Nest.js module generation (modgen)
