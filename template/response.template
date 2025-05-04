@@ -1,7 +1,7 @@
-import { I<%pascal%> } from '../interfaces/<%kebab%>.interface';
+import { I<%pascal%>Record } from '../interfaces/<%kebab%>.interface';
 
-export class <%pascal%>Response implements I<%pascal%> {
-  id: number;
+export class <%pascal%>Response implements I<%pascal%>Record {
+  id: string;
 
 <%attributes%>
 

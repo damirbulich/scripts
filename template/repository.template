@@ -1,82 +1,38 @@
 import { Injectable } from '@nestjs/common';
-import { EntityManager, SelectQueryBuilder } from 'typeorm';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 
-import { PaginationParams } from 'src/common/pagination/pagination.params';
+import { AbstractRepository } from 'src/common/abstract/abstract.repository';
+import { PaginationOptionsDto } from 'src/common/dto/pagination/pagination-options.dto';
 
 import { <%pascal%> } from '../entities/<%kebab%>.entity';
-import { I<%pascal%> } from '../interfaces/<%kebab%>.interface';
+import { I<%pascal%>Record } from '../interfaces/<%kebab%>.interface';
 import { I<%pascal%>Repository } from '../interfaces/<%kebab%>.repository.interface';
 
 @Injectable()
-export class <%pascal%>Repository implements I<%pascal%>Repository {
-  constructor(private readonly entity: EntityManager) {}
-
-  list(params: PaginationParams): Promise<[I<%pascal%>[], number]> {
-    return this.getBaseQuery()
-      .skip(params.skip)
-      .take(params.limit)
-      .orderBy('<%camel%>.createdAt', 'ASC')
-      .comment('<%pascal%>Repository.list')
-      .getManyAndCount();
+export class <%pascal%>Repository
+  extends AbstractRepository<I<%pascal%>Record>
+  implements I<%pascal%>Repository
+{
+  constructor(
+    @InjectRepository(<%pascal%>)
+    repository: Repository<<%pascal%>>,
+  ) {
+    super(repository);
   }
 
-  findById(id: number): Promise<I<%pascal%>> {
-    return this.getBaseQuery()
-      .where('<%camel%>.id = :id', { id })
-      .comment('<%pascal%>Repository.findById')
-      .getOne();
+  async findById(id: string): Promise<I<%pascal%>Record> {
+    return await this.entity.findOne({ where: { id: id } });
   }
 
-  async existById(id: number): Promise<boolean> {
-    return this.entity
-      .createQueryBuilder()
-      .from(<%pascal%>, '<%camel%>')
-      .where('<%camel%>.id = :id', { id })
-      .comment('<%pascal%>Repository.existById')
-      .getExists();
+  async findManyAndCount({
+    page,
+    limit,
+  }: PaginationOptionsDto): Promise<[I<%pascal%>Record[], number]> {
+    return await this.entity.findAndCount({ skip: page, take: limit });
   }
 
-  async create(<%camel%>: I<%pascal%>): Promise<I<%pascal%>> {
-    const raw = await this.entity
-      .createQueryBuilder()
-      .insert()
-      .into(<%pascal%>)
-      .values(<%camel%>)
-      .returning('*')
-      .comment('<%pascal%>Repository.create')
-      .execute();
-    return raw.generatedMaps[0] as I<%pascal%>;
-  }
-
-  async update(<%camel%>: Partial<I<%pascal%>>): Promise<I<%pascal%>> {
-    const raw = await this.entity
-      .createQueryBuilder()
-      .update(<%pascal%>)
-      .set(<%camel%>)
-      .where('id = :id', { id: <%camel%>.id })
-      .returning('*')
-      .comment('<%pascal%>Repository.update')
-      .execute();
-    return raw.generatedMaps[0] as I<%pascal%>;
-  }
-
-  delete(id: number): Promise<void> {
-    return void this.entity
-      .createQueryBuilder()
-      .delete()
-      .from(<%pascal%>)
-      .where('id = :id', { id })
-      .comment('<%pascal%>Repository.delete')
-      .execute();
-  }
-
-  private getBaseQuery(): SelectQueryBuilder<<%pascal%>> {
-    return this.entity
-      .createQueryBuilder()
-      .from(<%pascal%>, '<%camel%>')
-      .select([
-        '<%camel%>.id',
-        '<%camel%>.createdAt',
-      ]);
+  async existsById(id: string): Promise<boolean> {
+    return this.entity.exists({ where: { id } });
   }
 }

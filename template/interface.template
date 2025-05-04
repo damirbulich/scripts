@@ -1,9 +1,9 @@
-export interface ICreate<%pascal%> {
+export interface I<%pascal%> {
 <%attributes%>
 }
 
-export interface I<%pascal%> extends ICreate<%pascal%> {
-  id: number;
+export interface I<%pascal%>Record extends I<%pascal%> {
+  id: string;
   createdAt: Date;
   updatedAt: Date;
 }
