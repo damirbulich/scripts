@@ -6,12 +6,12 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
-import { I<%pascal%> } from '../interfaces/<%kebab%>.interface';
+import { I<%pascal%>Record } from '../interfaces/<%kebab%>.interface';
 
 @Entity({ name: '<%snake_plural%>' })
-export class <%pascal%> implements I<%pascal%> {
-  @PrimaryGeneratedColumn()
-  id: number;
+export class <%pascal%> implements I<%pascal%>Record {
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
 <%attributes%>
 
