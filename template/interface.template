@@ -1,0 +1,9 @@
+export interface ICreate<%pascal%> {
+<%attributes%>
+}
+
+export interface I<%pascal%> extends ICreate<%pascal%> {
+  id: number;
+  createdAt: Date;
+  updatedAt: Date;
+}

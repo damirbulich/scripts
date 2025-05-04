@@ -1,0 +1,104 @@
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  HttpCode,
+  HttpStatus,
+  Inject,
+  Param,
+  Patch,
+  Post,
+  Query,
+} from '@nestjs/common';
+import {
+  ApiCreatedResponse,
+  ApiNoContentResponse,
+  ApiOkResponse,
+  ApiOperation,
+  ApiResponse,
+  ApiTags,
+} from '@nestjs/swagger';
+
+import { NumberIdParam } from 'src/common/dto/number-id.param';
+import { NDOExceptionResponse } from 'src/common/exceptions/custom-exception.response';
+import { PaginationParams } from 'src/common/pagination/pagination.params';
+
+import { Create<%pascal%>Dto } from './dtos/create-<%kebab%>.dto';
+import { Update<%pascal%>Dto } from './dtos/update-<%kebab%>.dto';
+import {
+  I<%pascal%>Service,
+  <%pascal%>ServiceToken,
+} from './interfaces/<%kebab%>.service.interface';
+import { Paginated<%pascal%>Response } from './responses/<%kebab%>.paginated.response';
+import { <%pascal%>Response } from './responses/<%kebab%>.response';
+
+@ApiTags('<%plural_capitalized%>')
+@ApiResponse({
+  description: 'Non 2xx response',
+  type: NDOExceptionResponse,
+})
+@Controller('<%plural_kebab%>')
+export class <%pascal%>Controller {
+  constructor(
+    @Inject(<%pascal%>ServiceToken) private readonly <%camel%>Service: I<%pascal%>Service,
+  ) {}
+
+  @ApiOperation({ summary: 'Create a new <%normal%>' })
+  @ApiCreatedResponse({
+    status: HttpStatus.CREATED,
+    description: '<%normal_capital%> resource',
+    type: <%pascal%>Response,
+  })
+  @HttpCode(HttpStatus.CREATED)
+  @Post()
+  create(@Body() data: Create<%pascal%>Dto) {
+    return this.<%camel%>Service.create(data);
+  }
+
+  @ApiOperation({ summary: 'List all <%plural_normal%>' })
+  @ApiOkResponse({
+    status: HttpStatus.OK,
+    description: 'Paginated list of <%plural_normal%>',
+    type: Paginated<%pascal%>Response,
+  })
+  @HttpCode(HttpStatus.OK)
+  @Get()
+  list(@Query() params: PaginationParams) {
+    return this.<%camel%>Service.listAll(params);
+  }
+
+  @ApiOperation({ summary: 'Find a <%normal%> by ID' })
+  @ApiOkResponse({
+    status: HttpStatus.OK,
+    description: '<%normal_capital%> resource',
+    type: <%pascal%>Response,
+  })
+  @HttpCode(HttpStatus.OK)
+  @Get(':id')
+  find(@Param() { id }: NumberIdParam) {
+    return this.<%camel%>Service.findOne(id);
+  }
+
+  @ApiOperation({ summary: 'Update a <%normal%>' })
+  @ApiOkResponse({
+    status: HttpStatus.OK,
+    description: '<%normal_capital%> resource',
+    type: <%pascal%>Response,
+  })
+  @HttpCode(HttpStatus.OK)
+  @Patch(':id')
+  update(@Param() { id }: NumberIdParam, @Body() data: Update<%pascal%>Dto) {
+    return this.<%camel%>Service.update(id, data);
+  }
+
+  @ApiOperation({ summary: 'Delete a <%normal%>' })
+  @ApiNoContentResponse({
+    description: '<%normal_capital%> deleted',
+  })
+  @HttpCode(HttpStatus.NO_CONTENT)
+  @Delete(':id')
+  remove(@Param() { id }: NumberIdParam) {
+    return this.<%camel%>Service.remove(id);
+  }
+}

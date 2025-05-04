@@ -1,0 +1,4 @@
+import { ICreate<%pascal%> } from '../interfaces/<%kebab%>.interface';
+
+export class Create<%pascal%>Dto implements ICreate<%pascal%> {
+}

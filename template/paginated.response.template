@@ -1,0 +1,10 @@
+import { ApiProperty } from '@nestjs/swagger';
+
+import { PaginationModel } from 'src/common/pagination/paginaton.model';
+
+import { <%pascal%>Response } from './<%kebab%>.response';
+
+export class Paginated<%pascal%>Response extends PaginationModel<<%pascal%>Response> {
+  @ApiProperty({ type: [<%pascal%>Response] })
+  items: <%pascal%>Response[];
+}

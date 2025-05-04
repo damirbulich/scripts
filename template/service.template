@@ -1,0 +1,60 @@
+import { Inject } from '@nestjs/common';
+
+import { NDONotFoundException } from 'src/common/exceptions/custom.exception';
+import { PaginationParams } from 'src/common/pagination/pagination.params';
+import { PaginationModel } from 'src/common/pagination/paginaton.model';
+
+import { Create<%pascal%>Dto } from '../dtos/create-<%kebab%>.dto';
+import { Update<%pascal%>Dto } from '../dtos/update-<%kebab%>.dto';
+import { I<%pascal%> } from '../interfaces/<%kebab%>.interface';
+import {
+  I<%pascal%>Repository,
+  <%pascal%>RepositoryToken,
+} from '../interfaces/<%kebab%>.repository.interface';
+import { I<%pascal%>Service } from '../interfaces/<%kebab%>.service.interface';
+
+export class <%pascal%>Service implements I<%pascal%>Service {
+  constructor(
+    @Inject(<%pascal%>RepositoryToken)
+    private readonly <%camel%>Repository: I<%pascal%>Repository,
+  ) {}
+
+  async create(data: Create<%pascal%>Dto): Promise<I<%pascal%>> {
+    const <%camel%> = await this.<%camel%>Repository.create(data);
+    return <%camel%>;
+  }
+
+  async listAll(params: PaginationParams): Promise<PaginationModel<I<%pascal%>>> {
+    const [<%camel_plural%>, total] = await this.<%camel%>Repository.list(params);
+    return new PaginationModel<I<%pascal%>>(<%camel_plural%>, params, total);
+  }
+
+  async findOne(id: number): Promise<I<%pascal%>> {
+    const <%camel%> = await this.<%camel%>Repository.findById(id);
+    if (!<%camel%>) {
+      throw new NDONotFoundException('<%normal_capital%> not found');
+    }
+    return <%camel%>;
+  }
+
+  async checkExistanceOrFail(id: number): Promise<void> {
+    const exist = await this.<%camel%>Repository.existById(id);
+    if (!exist) {
+      throw new NDONotFoundException('<%normal_capital%> not found');
+    }
+  }
+
+  async update(id: number, data: Update<%pascal%>Dto): Promise<I<%pascal%>> {
+    const <%camel%> = await this.<%camel%>Repository.findById(id);
+    if (!<%camel%>) {
+      throw new NDONotFoundException('<%normal_capital%> not found');
+    }
+    Object.assign(<%camel%>, data);
+    return this.<%camel%>Repository.update(<%camel%>);
+  }
+
+  async remove(id: number): Promise<void> {
+    await this.checkExistanceOrFail(id);
+    await this.<%camel%>Repository.delete(id);
+  }
+}

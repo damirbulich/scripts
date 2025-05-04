@@ -1,0 +1,11 @@
+import { I<%pascal%> } from '../interfaces/<%kebab%>.interface';
+
+export class <%pascal%>Response implements I<%pascal%> {
+  id: number;
+
+<%attributes%>
+
+  createdAt: Date;
+
+  updatedAt: Date;
+}

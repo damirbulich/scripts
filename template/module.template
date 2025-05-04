@@ -1,0 +1,26 @@
+import { Module } from '@nestjs/common';
+import { TypeOrmModule } from '@nestjs/typeorm';
+
+import { <%pascal%> } from './entities/<%kebab%>.entity';
+import { <%pascal%>RepositoryToken } from './interfaces/<%kebab%>.repository.interface';
+import { <%pascal%>ServiceToken } from './interfaces/<%kebab%>.service.interface';
+import { <%pascal%>Repository } from './providers/<%kebab%>.repository';
+import { <%pascal%>Service } from './providers/<%kebab%>.service';
+import { <%pascal%>Controller } from './<%kebab%>.controller';
+
+@Module({
+  imports: [TypeOrmModule.forFeature([<%pascal%>])],
+  controllers: [<%pascal%>Controller],
+  providers: [
+    {
+      provide: <%pascal%>RepositoryToken,
+      useClass: <%pascal%>Repository,
+    },
+    {
+      provide: <%pascal%>ServiceToken,
+      useClass: <%pascal%>Service,
+    },
+  ],
+  exports: [<%pascal%>RepositoryToken],
+})
+export class <%pascal%>Module {}

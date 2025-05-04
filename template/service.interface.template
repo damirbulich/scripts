@@ -1,0 +1,52 @@
+import { PaginationParams } from 'src/common/pagination/pagination.params';
+import { PaginationModel } from 'src/common/pagination/paginaton.model';
+
+import { Create<%pascal%>Dto } from '../dtos/create-<%kebab%>.dto';
+import { Update<%pascal%>Dto } from '../dtos/update-<%kebab%>.dto';
+import { I<%pascal%> } from './<%kebab%>.interface';
+
+export const <%pascal%>ServiceToken = Symbol('<%pascal%>ServiceToken');
+
+export interface I<%pascal%>Service {
+  /**
+   * Create a new <%normal%>.
+   * @param data - <%normal%> data
+   * @returns <%pascal%> resource
+   */
+  create(data: Create<%pascal%>Dto): Promise<I<%pascal%>>;
+
+  /**
+   * List all <%plural_normal%>.
+   * @param params - pagination parameters: skip, limit
+   * @returns Paginated list of <%normal%> entities
+   */
+  listAll(params: PaginationParams): Promise<PaginationModel<I<%pascal%>>>;
+
+  /**
+   * Find a <%normal%> by ID.
+   * @param id - ID of the <%normal%>
+   * @returns <%pascal%> resource
+   */
+  findOne(id: number): Promise<I<%pascal%>>;
+
+  /**
+   * Check if a <%normal%> exists by ID.
+   * @param id - ID of the <%normal%>
+   * @throws Exception if the <%normal%> does not exist
+   */
+  checkExistanceOrFail(id: number): Promise<void>;
+
+  /**
+   * Update a <%normal%>.
+   * @param id - ID of the <%normal%>
+   * @param data - <%normal%> data
+   * @returns <%pascal%> resource
+   */
+  update(id: number, data: Update<%pascal%>Dto): Promise<I<%pascal%>>;
+
+  /**
+   * Delete a <%normal%> by ID.
+   * @param id - ID of the <%normal%>
+   */
+  remove(id: number): Promise<void>;
+}
