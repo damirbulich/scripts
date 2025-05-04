@@ -1,0 +1,23 @@
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
+
+import { I<%pascal%> } from '../interfaces/<%kebab%>.interface';
+
+@Entity({ name: '<%snake_plural%>' })
+export class <%pascal%> implements I<%pascal%> {
+  @PrimaryGeneratedColumn()
+  id: number;
+
+<%attributes%>
+
+  @CreateDateColumn({ name: 'created_at', type: 'timestamptz' })
+  createdAt: Date;
+
+  @UpdateDateColumn({ name: 'updated_at', type: 'timestamptz' })
+  updatedAt: Date;
+}

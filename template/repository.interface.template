@@ -1,0 +1,49 @@
+import { PaginationParams } from 'src/common/pagination/pagination.params';
+
+import { I<%pascal%>, ICreate<%pascal%> } from './<%kebab%>.interface';
+
+export const <%pascal%>RepositoryToken = Symbol('<%pascal%>RepositoryToken');
+
+export interface I<%pascal%>Repository {
+
+  /**
+   * List all <%plural_normal%>.
+   * @param params - pagination parameters: skip, limit
+   * @returns List of <%normal%> entities
+   */
+  list(params: PaginationParams): Promise<[I<%pascal%>[], number]>;
+
+  /**
+   * Find a <%normal%> by ID.
+   * @param id - ID of the <%normal%>
+   * @returns <%pascal%> entity
+   */
+  findById(id: number): Promise<I<%pascal%> | null>;
+
+  /**
+   * Check if a <%normal%> exists by ID.
+   * @param id - ID of the <%normal%>
+   * @returns Boolean
+   */
+  existById(id: number): Promise<boolean>;
+
+  /**
+   * Create a new <%normal%>.
+   * @param <%camel%> - <%pascal%> entity
+   * @returns <%pascal%> entity
+   */
+  create(<%camel%>: ICreate<%pascal%>): Promise<I<%pascal%>>;
+
+  /**
+   * Update a <%normal%>.
+   * @param <%camel%> - <%pascal%> entity
+   * @returns <%pascal%> entity
+   */
+  update(<%camel%>: Partial<I<%pascal%>>): Promise<I<%pascal%>>;
+
+  /**
+   * Delete a <%normal%> by ID.
+   * @param id - ID of the <%normal%>
+   */
+  delete(id: number): Promise<void>;
+}
