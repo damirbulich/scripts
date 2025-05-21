@@ -26,10 +26,10 @@ export class <%pascal%>Repository
   }
 
   async findManyAndCount({
-    page,
+    skip,
     limit,
   }: PaginationOptionsDto): Promise<[I<%pascal%>Record[], number]> {
-    return await this.entity.findAndCount({ skip: page, take: limit });
+    return await this.entity.findAndCount({ skip, take: limit });
   }
 
   async existsById(id: string): Promise<boolean> {
