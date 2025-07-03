@@ -20,8 +20,8 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 
-import { NumberIdParam } from 'src/common/dto/number-id.param';
-import { NDOExceptionResponse } from 'src/common/exceptions/custom-exception.response';
+import { UUIDParam } from 'src/common/dto/uuid.param';
+import { AthesExceptionResponse } from 'src/common/exceptions/custom-exception.response';
 import { PaginationParams } from 'src/common/pagination/pagination.params';
 
 import { Create<%pascal%>Dto } from './dtos/create-<%kebab%>.dto';
@@ -36,7 +36,7 @@ import { <%pascal%>Response } from './responses/<%kebab%>.response';
 @ApiTags('<%plural_capitalized%>')
 @ApiResponse({
   description: 'Non 2xx response',
-  type: NDOExceptionResponse,
+  type: AthesExceptionResponse,
 })
 @Controller('<%plural_kebab%>')
 export class <%pascal%>Controller {
@@ -76,7 +76,7 @@ export class <%pascal%>Controller {
   })
   @HttpCode(HttpStatus.OK)
   @Get(':id')
-  find(@Param() { id }: NumberIdParam) {
+  find(@Param() { id }: UUIDParam) {
     return this.<%camel%>Service.findOne(id);
   }
 
@@ -88,7 +88,7 @@ export class <%pascal%>Controller {
   })
   @HttpCode(HttpStatus.OK)
   @Patch(':id')
-  update(@Param() { id }: NumberIdParam, @Body() data: Update<%pascal%>Dto) {
+  update(@Param() { id }: UUIDParam, @Body() data: Update<%pascal%>Dto) {
     return this.<%camel%>Service.update(id, data);
   }
 
@@ -98,7 +98,7 @@ export class <%pascal%>Controller {
   })
   @HttpCode(HttpStatus.NO_CONTENT)
   @Delete(':id')
-  remove(@Param() { id }: NumberIdParam) {
+  remove(@Param() { id }: UUIDParam) {
     return this.<%camel%>Service.remove(id);
   }
 }

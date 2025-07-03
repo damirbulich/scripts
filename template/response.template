@@ -2,10 +2,7 @@ import { I<%pascal%>Record } from '../interfaces/<%kebab%>.interface';
 
 export class <%pascal%>Response implements I<%pascal%>Record {
   id: string;
-
-<%attributes%>
-
+  <%attributes%>
   createdAt: Date;
-
   updatedAt: Date;
 }
