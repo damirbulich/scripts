@@ -1,6 +1,6 @@
 import { Inject } from '@nestjs/common';
 
-import { ProjectAbbrvNotFoundException } from 'src/common/exceptions/custom.exception';
+import { AthesNotFoundException } from 'src/common/exceptions/custom.exception';
 import { PaginationParams } from 'src/common/pagination/pagination.params';
 import { PaginationModel } from 'src/common/pagination/paginaton.model';
 
@@ -32,7 +32,7 @@ export class <%pascal%>Service implements I<%pascal%>Service {
   async findOne(id: string): Promise<I<%pascal%>Record> {
     const <%camel%> = await this.<%camel%>Repository.findById(id);
     if (!<%camel%>) {
-      throw new ProjectAbbrvNotFoundException('<%normal_capital%> not found');
+      throw new AthesNotFoundException('<%normal_capital%> not found');
     }
     return <%camel%>;
   }
@@ -40,15 +40,12 @@ export class <%pascal%>Service implements I<%pascal%>Service {
   async checkExistanceOrFail(id: string): Promise<void> {
     const exist = await this.<%camel%>Repository.existsById(id);
     if (!exist) {
-      throw new ProjectAbbrvNotFoundException('<%normal_capital%> not found');
+      throw new AthesNotFoundException('<%normal_capital%> not found');
     }
   }
 
   async update(id: string, data: Update<%pascal%>Dto): Promise<I<%pascal%>Record> {
-    const <%camel%> = await this.<%camel%>Repository.findById(id);
-    if (!<%camel%>) {
-      throw new ProjectAbbrvNotFoundException('<%normal_capital%> not found');
-    }
+    const <%camel%> = await this.findOne(id);
     Object.assign(<%camel%>, data);
     return this.<%camel%>Repository.save(<%camel%>);
   }

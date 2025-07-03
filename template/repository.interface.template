@@ -21,7 +21,7 @@ export interface I<%pascal%>Repository extends IRepository<I<%pascal%>Record> {
   ): Promise<[I<%pascal%>Record[], number]>;
 
   /**
-   * Check wether the record exists in the database
+   * Check whether the record exists in the database
    * @param id - unique id of <%plural_normal%>
    */
   existsById(id: string): Promise<boolean>;

@@ -2,8 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
+import { PaginationParams } from 'src/common/pagination/pagination.params';
 import { AbstractRepository } from 'src/common/abstract/abstract.repository';
-import { PaginationOptionsDto } from 'src/common/dto/pagination/pagination-options.dto';
 
 import { <%pascal%> } from '../entities/<%kebab%>.entity';
 import { I<%pascal%>Record } from '../interfaces/<%kebab%>.interface';
@@ -28,7 +28,7 @@ export class <%pascal%>Repository
   async findManyAndCount({
     skip,
     limit,
-  }: PaginationOptionsDto): Promise<[I<%pascal%>Record[], number]> {
+  }: PaginationParams): Promise<[I<%pascal%>Record[], number]> {
     return await this.entity.findAndCount({ skip, take: limit });
   }
 
